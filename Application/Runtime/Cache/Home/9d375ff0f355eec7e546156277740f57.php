@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h2>紫顺官网 + 小程序 后台</2>
