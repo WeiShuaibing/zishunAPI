@@ -43,8 +43,18 @@ class CaseController extends Controller
      * 获取所有的实例信息
      */
     public function getCaseList(){
-        $data = $this->case->field('id,title,village,style,hourse,designer,area,status,create_time')->order('create_time desc')->select();
-        echo returnSuccess('查询成功',$data);
+        $page = $_GET['page'];
+        $limit = $_GET['limit'];
+
+        $total = $this->case->count();
+
+        $data = $this->case
+            ->field('id,title,village,style,hourse,designer,area,status,create_time')
+            ->order('id desc')
+            ->limit(($page-1)*$limit, $limit)
+            ->select();
+//        $data['total'] = $total;
+        echo returnSuccess('查询成功',$data,$total);
     }
 
     /**

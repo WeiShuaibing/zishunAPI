@@ -10,7 +10,7 @@
  *
  * 返回成功的json数据
  */
-function returnSuccess($msg="" , $data=array()){
+function returnSuccess($msg="" , $data=array(), $other=null){
     if(empty($data)){
         $result = array(
             'code' => 500,
@@ -22,6 +22,7 @@ function returnSuccess($msg="" , $data=array()){
         $result = array(
             'code' => 200,
             'msg'  => $msg,
+            'other' => $other,
             'data' => $data
         );
 //        return $result;

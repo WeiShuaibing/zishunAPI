@@ -48,8 +48,18 @@ class ScenceController extends Controller
      * 查询所有的实景展示
      */
     public function getScenceList(){
-        $data = $this->scence->field('id,title,url,status,create_time')->order('create_time desc')->select();
-        echo returnSuccess('查询成功',$data);
+
+        $page = $_GET['page'];
+        $limit = $_GET['limit'];
+
+        $total = $this->scence->count();
+
+        $data = $this->scence
+            ->field('id,title,url,status,create_time')
+            ->order('id desc')
+            ->limit(($page-1)*$limit, $limit)
+            ->select();
+        echo returnSuccess('查询成功',$data,$total);
     }
 
     /**
