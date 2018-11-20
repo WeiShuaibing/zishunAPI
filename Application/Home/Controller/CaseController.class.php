@@ -40,7 +40,7 @@ class CaseController extends Controller
 
 
 
-        $total = $this->case->count();
+        $total = $this->case->where($w)->count();
 
         $data = $this->case
             ->field('id,title,village,style,hourse,designer,area,cover,status,create_time')
@@ -51,6 +51,22 @@ class CaseController extends Controller
             ->select();
 //        $data['total'] = $total;
         echo returnSuccess('查询成功',$data,$total);
+    }
+    /**
+     * 根据id查询具体的case所有信息
+     * @param $id
+     */
+    public function getCaseById(){
+/*
+        header("Access-Control-Allow-Origin:*");//注意修改这里填写你的前端的域名
+        header("Access-Control-Allow-Headers:DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,SessionToken");
+        header('Access-Control-Allow-Methods: GET, POST, PUT,DELETE');*/
+
+        $id = $_GET['id'];
+
+        $data = $this->case->where("id=$id")->find();
+        $data['cover'] = picture_base64($data['cover']);
+        echo returnSuccess('查询成功',$data);
     }
 
     public function test(){
